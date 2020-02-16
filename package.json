@@ -1,10 +1,28 @@
 {
     "name": "gulp-rezzy",
-    "version": "0.2.0",
+    "version": "0.2.1",
+    "license": "MIT",
     "main": "rezzy.js",
     "repository": "https://github.com/rbnlffl/gulp-rezzy.git",
-    "author": "Robin Löffel (https://robinloeffel.ch) <hi@robinloeffel.ch>",
-    "license": "MIT",
+    "author": {
+        "name": "Robin Löffel",
+        "email": "hi@robinloeffel.ch",
+        "url": "robinloeffel.ch"
+    },
+    "engines": {
+        "node": ">=8"
+    },
+    "files": [
+        "rezzy.js"
+    ],
+    "keywords": [
+        "gulpplugin",
+        "gulp",
+        "sharp",
+        "image",
+        "images",
+        "resizing"
+    ],
     "devDependencies": {
         "eslint": "^6.8.0",
         "gulp": "^4.0.2"
