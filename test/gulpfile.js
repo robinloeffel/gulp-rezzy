@@ -1,7 +1,7 @@
 const gulp = require('gulp');
 const rezzy = require('../rezzy');
 
-gulp.task('demo', () => {
+gulp.task('default', () => {
     return gulp.src('src/**/*')
         .pipe(rezzy([{
             width: 500,
