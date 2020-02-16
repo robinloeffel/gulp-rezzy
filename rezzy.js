@@ -7,8 +7,12 @@ const PluginError = require('plugin-error');
 const pluginName = 'gulp-rezzy';
 
 module.exports = (versions = []) => {
+    if (!Array.isArray(versions)) {
+        throw new PluginError(pluginName, 'The provided configuration is not an array.');
+    }
+
     return through(function(file, encoding, done) {
-        if (file.isNull()) {
+        if (file.isNull() || !versions.length) {
             done(null, file);
             return;
         }

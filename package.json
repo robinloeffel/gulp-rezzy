@@ -1,6 +1,6 @@
 {
     "name": "gulp-rezzy",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "license": "MIT",
     "main": "rezzy.js",
     "repository": "https://github.com/rbnlffl/gulp-rezzy.git",
@@ -37,8 +37,9 @@
         "vinyl": "^2.2.0"
     },
     "scripts": {
-        "test": "gulp -f test/gulpfile.js",
-        "lint": "xo rezzy.js"
+        "test": "yarn clean && gulp -f test/gulpfile.js",
+        "lint": "xo rezzy.js",
+        "clean": "rm -rf test/dist"
     },
     "xo": {
         "space": 4,

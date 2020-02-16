@@ -2,16 +2,17 @@ const gulp = require('gulp');
 const rezzy = require('../rezzy');
 
 gulp.task('default', () => {
-    return gulp.src('src/**/*')
+    return gulp.src('src/*')
         .pipe(rezzy([{
             width: 500,
-            suffix: '-sm'
+            suffix: '-500w'
         }, {
-            width: 1000,
-            suffix: '-md'
+            height: 1000,
+            suffix: '-1000h'
         }, {
-            width: 1500,
-            suffix: '-lg'
+            width: 400,
+            height: 300,
+            suffix: '-400x300'
         }]))
         .pipe(gulp.dest('dist'));
 });
