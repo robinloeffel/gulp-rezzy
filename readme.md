@@ -14,7 +14,7 @@ const gulp = require('gulp');
 const rezzy = require('gulp-rezzy');
 
 gulp.task('images:resize', () => {
-    gulp.src('src/img/**/*')
+    return gulp.src('src/img/**/*')
         .pipe(rezzy([{
             width: 400,
             suffix: '-sm'
