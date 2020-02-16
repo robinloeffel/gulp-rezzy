@@ -42,7 +42,7 @@ const config = {
 If there's a `width` present, `height` is optional, and vice-versa. One of them has to exist, else no transformation will be done. If both are present, the image might get skewed. If only one is, the other gets generated automatically to preserve the aspect ratio. This is the preferred way.
 
 ## Thanks
-This plugin makes strong use of [sharp](https://github.com/lovell/sharp) under the hood. Big props to them! Other than that: Shoutout to [through2](https://github.com/rvagg/through2), [chalk](https://github.com/chalk/chalk), and of course the [gulp team](https://github.com/gulpjs) for [gulp](https://github.com/gulpjs/gulp), [fancy-log](https://github.com/fancy-log), [plugin-error](https://github.com/plugin-error) and [vinyl](https://github.com/gulpjs/vinyl)!
+This plugin makes strong use of [sharp](https://github.com/lovell/sharp) under the hood. Big props to them! Other than that: Shoutout to [through2](https://github.com/rvagg/through2), [chalk](https://github.com/chalk/chalk), and of course the [gulp team](https://github.com/gulpjs) for [gulp](https://github.com/gulpjs/gulp), [fancy-log](https://github.com/gulpjs/fancy-log), [plugin-error](https://github.com/gulpjs/plugin-error) and [vinyl](https://github.com/gulpjs/vinyl)!
 
 ## License
 MIT

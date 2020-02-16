@@ -10,7 +10,7 @@ module.exports = (versions = []) => {
     return through(function(chunk, encoding, done) {
         versions.forEach((version, index) => {
             if (!version.suffix || !(version.width || version.height)) {
-                this.emit('error', new PluginError(pluginName, 'Incorrect configuration array.'));
+                this.emit('error', new PluginError(pluginName, 'Incorrect configuration!'));
             }
 
             const image = sharp(chunk.contents);
