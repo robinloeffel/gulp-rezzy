@@ -1,14 +1,13 @@
 {
     "name": "gulp-rezzy",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "main": "rezzy.js",
     "repository": "https://github.com/rbnlffl/gulp-rezzy.git",
     "author": "Robin Löffel (https://robinloeffel.ch) <hi@robinloeffel.ch>",
     "license": "MIT",
     "devDependencies": {
         "eslint": "^6.8.0",
-        "gulp": "^4.0.2",
-        "imagemin-cli": "^5.1.0"
+        "gulp": "^4.0.2"
     },
     "dependencies": {
         "chalk": "^3.0.0",
@@ -20,8 +19,6 @@
     },
     "scripts": {
         "demo": "gulp demo",
-        "lint": "eslint rezzy.js gulpfile.js",
-        "imagemin": "imagemin demo/dist/* -o demo/dist",
-        "build": "yarn lint && yarn demo && yarn imagemin"
+        "lint": "eslint rezzy.js gulpfile.js"
     }
 }

@@ -1,10 +1,8 @@
 module.exports = {
     extends: 'eslint:recommended',
-    parserOptions: {
-        ecmaVersion: 8
-    },
     env: {
-        node: true
+        node: true,
+        es2017: true
     },
     rules: {
         curly: [2, 'all'],
