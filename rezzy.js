@@ -6,9 +6,7 @@ const File = require('vinyl');
 const PluginError = require('plugin-error');
 const pluginName = 'gulp-rezzy';
 
-
 module.exports = (versions = []) => {
-
     return through(function(file, encoding, done) {
         if (file.isNull()) {
             done(null, file);
@@ -20,7 +18,7 @@ module.exports = (versions = []) => {
             return;
         }
 
-        (async () => {
+        (async() => {
             try {
                 const promises = versions.map(async version => {
                     if (!version.suffix) {
@@ -55,5 +53,4 @@ module.exports = (versions = []) => {
             }
         })();
     });
-
 };

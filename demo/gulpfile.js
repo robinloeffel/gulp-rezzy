@@ -1,8 +1,8 @@
 const gulp = require('gulp');
-const rezzy = require('./rezzy');
+const rezzy = require('../rezzy');
 
 gulp.task('demo', () => {
-    return gulp.src('demo/src/**/*')
+    return gulp.src('src/**/*')
         .pipe(rezzy([{
             width: 500,
             suffix: '-sm'
@@ -13,5 +13,5 @@ gulp.task('demo', () => {
             width: 1500,
             suffix: '-lg'
         }]))
-        .pipe(gulp.dest('demo/dist'));
+        .pipe(gulp.dest('dist'));
 });
