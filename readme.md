@@ -3,7 +3,7 @@
 </p>
 
 # gulp-rezzy
-[![](https://img.shields.io/github/license/rbnlffl/gulp-rezzy.svg)](https://github.com/rbnlffl/gulp-rezzy/blob/master/license.md) [![](https://img.shields.io/npm/v/gulp-rezzy.svg)](https://www.npmjs.com/package/gulp-rezzy) [![](https://img.shields.io/npm/dm/gulp-rezzy.svg)](https://www.npmjs.com/package/gulp-rezzy)
+![latest version on npm](https://img.shields.io/npm/v/gulp-rezzy) ![npm downloads a month](https://img.shields.io/npm/dm/gulp-rezzy) ![node version](https://img.shields.io/node/v/gulp-rezzy) ![dependency status](https://img.shields.io/david/rbnlffl/gulp-rezzy) ![package license](https://img.shields.io/npm/l/gulp-rezzy)
 
 The incredibly fast image resizer for [gulp](https://github.com/gulpjs/gulp).
 
