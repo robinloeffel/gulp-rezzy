@@ -3,9 +3,9 @@
 </p>
 
 # gulp-rezzy
-![latest version on npm](https://img.shields.io/npm/v/gulp-rezzy) ![npm downloads a month](https://img.shields.io/npm/dm/gulp-rezzy) ![node version](https://img.shields.io/node/v/gulp-rezzy) ![dependency status](https://img.shields.io/david/rbnlffl/gulp-rezzy) ![package license](https://img.shields.io/npm/l/gulp-rezzy)
+[![latest version on npm](https://img.shields.io/npm/v/gulp-rezzy)](https://www.npmjs.com/package/gulp-rezzy) [![npm downloads a month](https://img.shields.io/npm/dm/gulp-rezzy)](https://www.npmjs.com/package/gulp-rezzy) [![required node version](https://img.shields.io/node/v/gulp-rezzy)](https://github.com/nodejs/Release) [![dependency status](https://img.shields.io/david/rbnlffl/gulp-rezzy)](https://david-dm.org/robinloeffel/gulp-rezzy) [![package license](https://img.shields.io/npm/l/gulp-rezzy)](license)
 
-The incredibly fast image resizer for [gulp](https://github.com/gulpjs/gulp).
+> The incredibly fast image resizer for [gulp](https://github.com/gulpjs/gulp). ⚡️
 
 ## What
 `gulp-rezzy` enables you to resize your images and then pipe each and every newly created version version of it into your stream. This allows you to only have one big background image asset in your source directory and then generate several smaller versions of it for all your responsiveness needs automatically. No more Photoshop for you, my friend!
@@ -51,7 +51,7 @@ const config = {
 This plugin works perfectly in tandem with [gulp-imagemin](https://github.com/sindresorhus/gulp-imagemin) and [gulp-webp](https://github.com/sindresorhus/gulp-webp).
 
 ## Thanks
-This plugin makes strong use of [sharp](https://github.com/lovell/sharp) under the hood. Big props to them! Other than that: Shoutout to [through2](https://github.com/rvagg/through2), [chalk](https://github.com/chalk/chalk), and of course the [gulp team](https://github.com/gulpjs) for [gulp](https://github.com/gulpjs/gulp), [fancy-log](https://github.com/gulpjs/fancy-log), [plugin-error](https://github.com/gulpjs/plugin-error) and [vinyl](https://github.com/gulpjs/vinyl)! Special thanks go out to [Sindre Sorhus](https://github.com/sindresorhus) for getting me on the right track in regards to writing a gulp plugin!
+This plugin makes strong use of [sharp](https://github.com/lovell/sharp) under the hood. Big props to them! Other than that: Shoutout to [chalk](https://github.com/chalk/chalk), and of course the [gulp team](https://github.com/gulpjs) for [gulp](https://github.com/gulpjs/gulp), [fancy-log](https://github.com/gulpjs/fancy-log), [plugin-error](https://github.com/gulpjs/plugin-error) and [vinyl](https://github.com/gulpjs/vinyl)! Special thanks go out to [Sindre Sorhus](https://github.com/sindresorhus) for getting me on the right track in regards to writing a gulp plugin!
 
 ## License
 MIT

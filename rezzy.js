@@ -1,4 +1,4 @@
-const through = require('through2').obj;
+const { Transform } = require('stream');
 const sharp = require('sharp');
 const log = require('fancy-log');
 const chalk = require('chalk');
@@ -7,18 +7,23 @@ const PluginError = require('plugin-error');
 const pluginName = 'gulp-rezzy';
 
 module.exports = (versions = []) => {
-    if (!Array.isArray(versions)) {
-        throw new PluginError(pluginName, 'The provided configuration is not an array.');
-    }
+    const stream = new Transform({
+        objectMode: true
+    });
 
-    return through(function(file, encoding, done) {
+    stream._transform = (file, encoding, done) => {
         if (file.isNull() || !versions.length) {
             done(null, file);
             return;
         }
 
+        if (!Array.isArray(versions)) {
+            done(new PluginError(pluginName, 'The configuration has to be an array!'));
+            return;
+        }
+
         if (file.isStream()) {
-            done(new PluginError(pluginName, 'Streams aren\'t supported!'));
+            done(new PluginError(pluginName, 'Streaming isn\'t supported!'));
             return;
         }
 
@@ -26,7 +31,7 @@ module.exports = (versions = []) => {
             try {
                 const promises = versions.map(async version => {
                     if (!version.suffix) {
-                        this.emit('error', new PluginError(pluginName, `${JSON.stringify(version)} does't include a suffix.`));
+                        stream.emit('error', new PluginError(pluginName, `${JSON.stringify(version)} does't include a suffix.`));
                     }
 
                     const image = sharp(file.contents);
@@ -45,16 +50,18 @@ module.exports = (versions = []) => {
 
                 const images = await Promise.all(promises);
                 images.forEach(image => {
-                    this.push(image);
+                    stream.push(image);
                     log(`${pluginName}: ${image.relative} ${chalk.green('✓')}`);
                 });
 
                 done();
             } catch (error) {
-                this.emit('error', new PluginError(pluginName, error, {
+                stream.emit('error', new PluginError(pluginName, error, {
                     fileName: file
                 }));
             }
         })();
-    });
+    };
+
+    return stream;
 };
