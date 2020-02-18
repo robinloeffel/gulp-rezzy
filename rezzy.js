@@ -4,6 +4,15 @@ const log = require('fancy-log');
 const chalk = require('chalk');
 const File = require('vinyl');
 const PluginError = require('plugin-error');
+
+const supportedFormats = new Set([
+    '.jpg',
+    '.jpeg',
+    '.png',
+    '.webp',
+    '.tiff',
+    '.raw'
+]);
 const pluginName = 'gulp-rezzy';
 
 module.exports = (versions = []) => {
@@ -24,6 +33,13 @@ module.exports = (versions = []) => {
 
         if (file.isStream()) {
             done(new PluginError(pluginName, 'Streaming isn\'t supported!'));
+            return;
+        }
+
+        if (!supportedFormats.has(file.extname.toLowerCase())) {
+            done(new PluginError(pluginName, `Can't resize ${file.extname} files!`, {
+                fileName: file.path
+            }));
             return;
         }
 
@@ -57,7 +73,7 @@ module.exports = (versions = []) => {
                 done();
             } catch (error) {
                 stream.emit('error', new PluginError(pluginName, error, {
-                    fileName: file
+                    fileName: file.path
                 }));
             }
         })();
