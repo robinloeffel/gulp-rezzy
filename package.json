@@ -3,7 +3,7 @@
     "version": "0.2.2",
     "license": "MIT",
     "main": "rezzy.js",
-    "repository": "https://github.com/rbnlffl/gulp-rezzy.git",
+    "repository": "rbnlffl/gulp-rezzy",
     "author": {
         "name": "Robin Löffel",
         "email": "hi@robinloeffel.ch",
@@ -25,8 +25,9 @@
         "resize"
     ],
     "devDependencies": {
-        "gulp": "^4.0.2",
-        "xo": "^0.26.1"
+        "eslint": "^6.8.0",
+        "eslint-config-sweet": "^0.1.0",
+        "gulp": "^4.0.2"
     },
     "dependencies": {
         "chalk": "^3.0.0",
@@ -38,16 +39,10 @@
     },
     "scripts": {
         "test": "yarn clean && gulp -f test/gulpfile.js",
-        "lint": "xo rezzy.js",
+        "lint": "eslint rezzy.js",
         "clean": "rm -rf test/dist"
     },
-    "xo": {
-        "space": 4,
-        "rules": {
-            "space-before-function-paren": [
-                "error",
-                "never"
-            ]
-        }
+    "eslintConfig": {
+        "extends": "sweet"
     }
 }

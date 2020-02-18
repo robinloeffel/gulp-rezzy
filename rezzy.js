@@ -22,7 +22,7 @@ module.exports = (versions = []) => {
             return;
         }
 
-        (async() => {
+        (async () => {
             try {
                 const promises = versions.map(async version => {
                     if (!version.suffix) {
