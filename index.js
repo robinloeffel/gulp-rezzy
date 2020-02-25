@@ -5,20 +5,11 @@ const chalk = require('chalk');
 const File = require('vinyl');
 const PluginError = require('plugin-error');
 
-const supportedFormats = new Set([
-    '.jpg',
-    '.jpeg',
-    '.png',
-    '.webp',
-    '.tiff',
-    '.raw'
-]);
+const supportedFormats = new Set([ '.jpg', '.jpeg', '.png', '.webp', '.tiff', '.raw' ]);
 const pluginName = 'gulp-rezzy';
 
 module.exports = (versions = []) => {
-    const stream = new Transform({
-        objectMode: true
-    });
+    const stream = new Transform({ objectMode: true });
 
     stream._transform = (file, encoding, done) => {
         if (file.isNull() || !versions.length) {
@@ -51,7 +42,12 @@ module.exports = (versions = []) => {
                     }
 
                     const image = sharp(file.contents);
-                    image.resize(version.width, version.height);
+                    image.resize({
+                        width: version.width,
+                        height: version.height,
+                        fit: version.fit,
+                        position: version.position
+                    });
 
                     const buffer = await image.toBuffer();
                     const resized = new File({

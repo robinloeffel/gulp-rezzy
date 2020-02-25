@@ -1,8 +1,8 @@
 {
     "name": "gulp-rezzy",
-    "version": "0.2.4",
+    "version": "0.3.0",
     "license": "MIT",
-    "main": "rezzy.js",
+    "main": "index.js",
     "repository": "rbnlffl/gulp-rezzy",
     "author": {
         "name": "Robin Löffel",
@@ -13,7 +13,7 @@
         "node": ">=8"
     },
     "files": [
-        "rezzy.js"
+        "index.js"
     ],
     "keywords": [
         "gulpplugin",
@@ -26,8 +26,9 @@
     ],
     "devDependencies": {
         "eslint": "^6.8.0",
-        "eslint-config-sweet": "^0.1.0",
-        "gulp": "^4.0.2"
+        "eslint-config-sweet": "^0.2.2",
+        "gulp": "^4.0.2",
+        "onchange": "^6.1.0"
     },
     "dependencies": {
         "chalk": "^3.0.0",
@@ -37,9 +38,8 @@
         "vinyl": "^2.2.0"
     },
     "scripts": {
-        "test": "yarn clean && gulp -f test/gulpfile.js",
-        "lint": "eslint rezzy.js",
-        "clean": "rm -rf test/dist"
+        "test": "rm -rf test/dist && eslint index.js && gulp -f test/gulpfile.js",
+        "start": "onchange -i -k index.js test/gulpfile.js -- yarn test"
     },
     "eslintConfig": {
         "extends": "sweet"
