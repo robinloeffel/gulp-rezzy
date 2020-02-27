@@ -11,7 +11,7 @@ const pluginName = 'gulp-rezzy';
 module.exports = (versions = []) => {
     const stream = new Transform({ objectMode: true });
 
-    stream._transform = (file, encoding, done) => {
+    stream._transform = async (file, encoding, done) => {
         if (file.isNull() || !versions.length) {
             done(null, file);
             return;
@@ -34,45 +34,43 @@ module.exports = (versions = []) => {
             return;
         }
 
-        (async () => {
-            try {
-                const promises = versions.map(async version => {
-                    if (!version.suffix) {
-                        stream.emit('error', new PluginError(pluginName, `${JSON.stringify(version)} does't include a suffix.`));
-                    }
+        try {
+            const promises = versions.map(async version => {
+                if (!version.suffix) {
+                    stream.emit('error', new PluginError(pluginName, `${JSON.stringify(version)} does't include a suffix.`));
+                }
 
-                    const image = sharp(file.contents);
-                    image.resize({
-                        width: version.width,
-                        height: version.height,
-                        fit: version.fit,
-                        position: version.position
-                    });
-
-                    const buffer = await image.toBuffer();
-                    const resized = new File({
-                        cwd: file.cwd,
-                        base: file.base,
-                        path: file.path.replace(file.extname, '') + version.suffix + file.extname,
-                        contents: buffer
-                    });
-
-                    return resized;
+                const image = sharp(file.contents);
+                image.resize({
+                    width: version.width,
+                    height: version.height,
+                    fit: version.fit,
+                    position: version.position
                 });
 
-                const images = await Promise.all(promises);
-                images.forEach(image => {
-                    stream.push(image);
-                    log(`${pluginName}: ${image.relative} ${chalk.green('✓')}`);
+                const buffer = await image.toBuffer();
+                const resized = new File({
+                    cwd: file.cwd,
+                    base: file.base,
+                    path: file.path.replace(file.extname, '') + version.suffix + file.extname,
+                    contents: buffer
                 });
 
-                done();
-            } catch (error) {
-                stream.emit('error', new PluginError(pluginName, error, {
-                    fileName: file.path
-                }));
-            }
-        })();
+                return resized;
+            });
+
+            const images = await Promise.all(promises);
+            images.forEach(image => {
+                stream.push(image);
+                log(`${pluginName}: ${image.relative} ${chalk.green('✓')}`);
+            });
+
+            done();
+        } catch (error) {
+            stream.emit('error', new PluginError(pluginName, error, {
+                fileName: file.path
+            }));
+        }
     };
 
     return stream;
