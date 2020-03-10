@@ -12,26 +12,24 @@ module.exports = (versions = []) => {
     const stream = new Transform({ objectMode: true });
 
     stream._transform = async (file, encoding, done) => {
-        if (file.isNull() || !versions.length) {
+        if (file.isNull()) {
             done(null, file);
             return;
         }
 
-        if (!Array.isArray(versions)) {
-            done(new PluginError(pluginName, 'The configuration has to be an array!'));
+        if (file.isStream()) {
+            done(new PluginError(pluginName, 'Streams aren\'t supported!'));
             return;
         }
 
-        if (file.isStream()) {
-            done(new PluginError(pluginName, 'Streaming isn\'t supported!'));
-            return;
+        if (!Array.isArray(versions)) {
+            stream.emit('error', new PluginError(pluginName, 'The configuration has to be an array!'));
         }
 
         if (!supportedFormats.has(file.extname.toLowerCase())) {
-            done(new PluginError(pluginName, `Can't resize ${file.extname} files!`, {
+            stream.emit('error', new PluginError(pluginName, `Can't resize ${file.extname} files!`, {
                 fileName: file.path
             }));
-            return;
         }
 
         try {
@@ -62,8 +60,10 @@ module.exports = (versions = []) => {
             const images = await Promise.all(promises);
             images.forEach(image => {
                 stream.push(image);
-                log(`${pluginName}: ${image.relative} ${chalk.green('✓')}`);
+                log(`${chalk.cyan(pluginName)}: created ${chalk.yellow(image.relative)}`);
             });
+
+            log(`${chalk.cyan(pluginName)}: from ${chalk.yellow(file.relative)}`);
 
             done();
         } catch (error) {
