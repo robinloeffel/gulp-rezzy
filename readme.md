@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="rezzy.png" width="600">
+    <img src="rezzy.png" width="762">
 </p>
 
 # gulp-rezzy

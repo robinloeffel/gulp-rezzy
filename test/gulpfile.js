@@ -1,5 +1,5 @@
 const gulp = require('gulp');
-const rezzy = require('../index');
+const rezzy = require('..');
 
 gulp.task('default', () => {
     return gulp.src('src/*')
@@ -19,5 +19,6 @@ gulp.task('default', () => {
             position: 'entropy',
             suffix: '-entropy'
         }]))
+        .pipe(rezzy())
         .pipe(gulp.dest('dist'));
 });

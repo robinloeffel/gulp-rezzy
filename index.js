@@ -12,7 +12,7 @@ module.exports = (versions = []) => {
     const stream = new Transform({ objectMode: true });
 
     stream._transform = async (file, encoding, done) => {
-        if (file.isNull()) {
+        if (file.isNull() || !versions.length) {
             done(null, file);
             return;
         }

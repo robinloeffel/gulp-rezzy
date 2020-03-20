@@ -1,6 +1,6 @@
 {
     "name": "gulp-rezzy",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "license": "MIT",
     "main": "index.js",
     "repository": "rbnlffl/gulp-rezzy",
@@ -26,7 +26,7 @@
     ],
     "devDependencies": {
         "eslint": "^6.8.0",
-        "eslint-config-sweet": "^0.2.2",
+        "eslint-config-sweet": "^0.3.0",
         "gulp": "^4.0.2",
         "onchange": "^6.1.0"
     },
@@ -34,7 +34,7 @@
         "chalk": "^3.0.0",
         "fancy-log": "^1.3.3",
         "plugin-error": "^1.0.1",
-        "sharp": "^0.24.1",
+        "sharp": "^0.25.1",
         "vinyl": "^2.2.0"
     },
     "scripts": {
