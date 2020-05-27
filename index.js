@@ -13,7 +13,7 @@ module.exports = (versions = []) => {
 
     stream._transform = async (file, encoding, done) => {
         if (file.isNull() || !versions.length) {
-            done(null, file);
+            done(undefined, file);
             return;
         }
 

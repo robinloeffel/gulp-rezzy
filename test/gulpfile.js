@@ -1,8 +1,7 @@
 const gulp = require('gulp');
 const rezzy = require('..');
 
-gulp.task('default', () => {
-    return gulp.src('src/*')
+gulp.task('default', () => gulp.src('src/*')
         .pipe(rezzy([{
             width: 500,
             suffix: '-500w'
@@ -19,6 +18,4 @@ gulp.task('default', () => {
             position: 'entropy',
             suffix: '-entropy'
         }]))
-        .pipe(rezzy())
-        .pipe(gulp.dest('dist'));
-});
+        .pipe(gulp.dest('dist')));
