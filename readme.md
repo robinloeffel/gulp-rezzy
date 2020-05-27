@@ -1,8 +1,8 @@
-<p align="center">
+<div align="center">
   <img src="rezzy.png">
-</p>
+</div>
 
-# gulp-rezzy
+<hr>
 
 [![latest version on npm](https://img.shields.io/npm/v/gulp-rezzy)](https://www.npmjs.com/package/gulp-rezzy) [![npm downloads a month](https://img.shields.io/npm/dm/gulp-rezzy)](https://www.npmjs.com/package/gulp-rezzy) [![required node version](https://img.shields.io/node/v/gulp-rezzy)](https://github.com/nodejs/Release) [![dependency status](https://img.shields.io/david/rbnlffl/gulp-rezzy)](https://david-dm.org/robinloeffel/gulp-rezzy) [![package license](https://img.shields.io/npm/l/gulp-rezzy)](license)
 
