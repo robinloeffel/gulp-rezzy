@@ -46,21 +46,48 @@ gulp.task('images', () => {
 });
 ```
 
-You can configure `gulp-rezzy` by passing in an array of objects containing your configs.
+## Config
 
-```js
-const config = {
-  width: 400, // width in px
-  height: 200, // height in px
-  fit: 'cover', // how the image should fit inside the specified dimensions
-  position: 'attention', // what or where to focus on when cropping is necessary
-  suffix: '-small' // string to prepend the file extension
-};
-```
+You can configure `gulp-rezzy` by passing in an array of objects containing the details of the versions to be generated.
 
-`width` and `height` are optional. If none of them are supplied, there'll be no resizing. If one of them is present, the image will be transformed accordingly, preserving the aspect ratio. If both are present, the image will be resized and cropped to those exact dimensions. `suffix` is always required. If no configuration gets passed, no transformations will be made.
+[`width`](#width) and [`height`](#height) are optional. If none of them are supplied, there'll be no resizing. If one of them is present, the image will be transformed accordingly, preserving the aspect ratio. If both are present, the image will be resized and cropped to those exact dimensions. [`suffix`](#suffix) is always required. If no configuration gets passed, no transformations will be made.
 
-You can see all available options for `fit` and `position` in the [`sharp` documentation](https://sharp.pixelplumbing.com/api-resize#resize). They get passed right through to it.
+You can see all available options for [`fit`](#fit) and [`position`](#position) in the [`sharp` documentation](https://sharp.pixelplumbing.com/api-resize#resize) or in the [`types` file](types/index.d.ts). They get passed right through to it.
+
+### `width`
+
+Type: `number`<br>
+Default: `undefined`
+
+Desired width of the image in pixels. Either [`width`](#width) or [`height`](#height) has to be set.
+
+### `height`
+
+Type: `number`<br>
+Default: `undefined`
+
+Desired height of the image in pixels. Either [`height`](#height) or [`width`](#width) has to be set.
+
+### `fit`
+
+Type: `string`<br>
+Default: `'cover'`
+
+How the image should fit inside the specified dimensions.
+
+### `position`
+
+Type: `string`<br>
+Default: `'center'`
+
+What or where to focus on when cropping is necessary.
+
+### `suffix`
+
+Type: `string`<br>
+Default: `undefined`
+
+String to prepend the file extension.
 
 ## Thanks
 

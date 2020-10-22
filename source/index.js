@@ -13,31 +13,27 @@ module.exports = (versions = []) => {
     objectMode: true
   });
 
-  stream._transform = async (file, encoding, done) => {
-    if (file.isNull() || !versions.length) {
-      done(undefined, file);
-      return;
+  stream._transform = async (file, _encoding, done) => {
+    if (file.isNull() || versions.length === 0) {
+      return done(null, file);
     }
 
     if (file.isStream()) {
-      done(new PluginError(pluginName, 'Streams aren\'t supported!'));
-      return;
+      return stream.emit('error', new PluginError(pluginName, 'Streams are not supported!'));
     }
 
     if (!Array.isArray(versions)) {
-      stream.emit('error', new PluginError(pluginName, 'The configuration has to be an array!'));
+      return stream.emit('error', new PluginError(pluginName, 'The options must be an array'));
     }
 
     if (!supportedFormats.has(file.extname.toLowerCase())) {
-      stream.emit('error', new PluginError(pluginName, `Can't resize ${file.extname} files!`, {
-        fileName: file.path
-      }));
+      return stream.emit('error', new PluginError(pluginName, `Can't resize ${file.extname} files!`));
     }
 
     try {
       const promises = versions.map(async version => {
         if (!version.suffix) {
-          stream.emit('error', new PluginError(pluginName, `${JSON.stringify(version)} does't include a suffix.`));
+          return stream.emit('error', new PluginError(pluginName, `${JSON.stringify(version)} does't include a suffix.`));
         }
 
         const image = sharp(file.contents);
@@ -64,14 +60,11 @@ module.exports = (versions = []) => {
         stream.push(image);
         log(`${chalk.cyan(pluginName)}: created ${chalk.yellow(image.relative)}`);
       });
-
       log(`${chalk.cyan(pluginName)}: from ${chalk.yellow(file.relative)}`);
 
-      done();
+      return done();
     } catch (error) {
-      stream.emit('error', new PluginError(pluginName, error, {
-        fileName: file.path
-      }));
+      return stream.emit('error', new PluginError(pluginName, error));
     }
   };
 

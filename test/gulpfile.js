@@ -1,5 +1,5 @@
 const gulp = require('gulp');
-const rezzy = require('..');
+const rezzy = require('../source');
 
 gulp.task('default', () => gulp.src('src/*')
   .pipe(rezzy([{

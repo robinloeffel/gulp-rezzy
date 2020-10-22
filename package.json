@@ -1,20 +1,14 @@
 {
   "name": "gulp-rezzy",
-  "version": "0.4.0",
+  "version": "1.0.0",
+  "description": " The incredibly fast image resizer utility for gulp. ⚡️",
+  "main": "source/index.js",
+  "types": "types/index.d.ts",
+  "repository": "https://github.com/robinloeffel/gulp-rezzy.git",
+  "homepage": "https://github.com/robinloeffel/gulp-rezzy",
+  "bugs": "https://github.com/robinloeffel/gulp-rezzy/issues",
+  "author": "Robin Löffel (https://robinloeffel.ch) <hi@robinloeffel.ch>",
   "license": "MIT",
-  "main": "index.js",
-  "repository": "robinloeffel/gulp-rezzy",
-  "author": {
-    "name": "Robin Löffel",
-    "email": "hi@robinloeffel.ch",
-    "url": "robinloeffel.ch"
-  },
-  "engines": {
-    "node": ">=10"
-  },
-  "files": [
-    "index.js"
-  ],
   "keywords": [
     "gulpplugin",
     "gulp",
@@ -24,24 +18,28 @@
     "resizing",
     "resize"
   ],
+  "engines": {
+    "node": ">=10"
+  },
+  "files": [
+    "source",
+    "types"
+  ],
   "devDependencies": {
-    "eslint": "^7.1.0",
-    "eslint-config-sweet": "^0.6.1",
+    "eslint": "^7.11.0",
+    "eslint-config-sweet": "^2.0.1",
     "gulp": "^4.0.2",
     "onchange": "^7.0.2"
   },
   "dependencies": {
-    "chalk": "^4.0.0",
+    "chalk": "^4.1.0",
     "fancy-log": "^1.3.3",
     "plugin-error": "^1.0.1",
-    "sharp": "^0.25.3",
-    "vinyl": "^2.2.0"
+    "sharp": "^0.26.2",
+    "vinyl": "^2.2.1"
   },
   "scripts": {
-    "test": "rm -rf test/dist && eslint index.js && gulp -f test/gulpfile.js",
-    "start": "onchange -i -k index.js test/gulpfile.js -- yarn test"
-  },
-  "eslintConfig": {
-    "extends": "sweet/node"
+    "test": "rm -rf test/dist && eslint source && gulp -f test/gulpfile.js",
+    "start": "onchange -i source/index.js test/gulpfile.js -- yarn test"
   }
 }
