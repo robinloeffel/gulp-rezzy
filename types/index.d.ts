@@ -1,5 +1,4 @@
 import { Transform } from 'stream';
-import sharp from 'sharp';
 
 interface RezzyVersion {
   /**
