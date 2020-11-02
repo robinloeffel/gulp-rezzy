@@ -39,7 +39,7 @@
     "vinyl": "^2.2.1"
   },
   "scripts": {
-    "test": "rm -rf test/dist && eslint source && gulp -f test/gulpfile.js",
+    "test": "rm -rf test/public && eslint source && gulp -f test/gulpfile.js",
     "start": "onchange -i source/index.js test/gulpfile.js -- yarn test"
   }
 }
