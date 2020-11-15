@@ -2,7 +2,6 @@ const { Transform } = require('stream');
 const sharp = require('sharp');
 const log = require('fancy-log');
 const chalk = require('chalk');
-const Vinyl = require('vinyl');
 const PluginError = require('plugin-error');
 
 const supportedFormats = new Set([ '.jpg', '.jpeg', '.png', '.webp', '.tiff', '.raw' ]);
@@ -27,41 +26,36 @@ module.exports = (versions = []) => new Transform({
       return this.emit('error', new PluginError(pluginName, `Can't resize ${file.extname} files!`));
     }
 
-    try {
-      const promises = versions.map(async version => {
-        if (!version.suffix) {
-          return this.emit('error', new PluginError(pluginName, `${JSON.stringify(version)} does't include a suffix.`));
-        }
+    const sharpImage = sharp(file.contents);
 
-        const image = sharp(file.contents);
-        image.resize({
+    const resizedImages = await Promise.all(versions.map(async version => {
+      if (!version.suffix) {
+        return this.emit('error', new PluginError(pluginName, `${JSON.stringify(version)} does't include a suffix.`));
+      }
+
+      const clonedVinyl = file.clone();
+
+      try {
+        clonedVinyl.extname = version.suffix + clonedVinyl.extname;
+        clonedVinyl.contents = await sharpImage.clone().resize({
           width: version.width,
           height: version.height,
           fit: version.fit,
           position: version.position
-        });
+        }).toBuffer();
 
-        const buffer = await image.toBuffer();
-        const resized = new Vinyl({
-          cwd: file.cwd,
-          base: file.base,
-          path: file.path.replace(file.extname, '') + version.suffix + file.extname,
-          contents: buffer
-        });
+        return clonedVinyl;
+      } catch (sharpError) {
+        return this.emit('error', new PluginError(pluginName, sharpError));
+      }
+    }));
 
-        return resized;
-      });
+    resizedImages.forEach(resizedImage => {
+      this.push(resizedImage);
+      log(`${chalk.cyan(pluginName)}: created ${chalk.yellow(resizedImage.relative)}`);
+    });
 
-      const images = await Promise.all(promises);
-      images.forEach(image => {
-        this.push(image);
-        log(`${chalk.cyan(pluginName)}: created ${chalk.yellow(image.relative)}`);
-      });
-
-      return done();
-    } catch (error) {
-      return this.emit('error', new PluginError(pluginName, error));
-    }
+    return done();
   }
 });
 
