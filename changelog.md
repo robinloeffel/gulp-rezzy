@@ -1,3 +1,11 @@
+# v2.0.0
+_2021-12-31_
+
+* breaking: minimum required node `v12.22`
+* update `chalk` and `sharp`
+* add `gulp` in `peerDependencies`
+* simplify source code
+
 # v1.1.0
 _2020-11-15_
 

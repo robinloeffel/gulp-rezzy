@@ -11,6 +11,12 @@ const images = () => src('source/*')
   }, {
     width: 1920,
     suffix: '-lg'
+  }, {
+    width: 1000,
+    height: 1000,
+    fit: 'cover',
+    position: 'bottom',
+    suffix: '-cover-bottom'
   }]))
   .pipe(dest('public'));
 

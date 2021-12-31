@@ -28,34 +28,29 @@ module.exports = (versions = []) => new Transform({
 
     const sharpImage = sharp(file.contents);
 
-    const resizedImages = await Promise.all(versions.map(async version => {
-      if (!version.suffix) {
-        return this.emit('error', new PluginError(pluginName, `${JSON.stringify(version)} does't include a suffix.`));
-      }
-
+    await Promise.all(versions.map(async ({
+      width, height, fit, position, suffix
+    }) => {
       const clonedVinyl = file.clone();
+      const clonedSharpImage = sharpImage.clone();
+
+      if (!suffix) {
+        return this.emit('error', new PluginError(pluginName, 'Not every version has a suffix property!'));
+      }
 
       try {
-        clonedVinyl.extname = version.suffix + clonedVinyl.extname;
-        clonedVinyl.contents = await sharpImage.clone().resize({
-          width: version.width,
-          height: version.height,
-          fit: version.fit,
-          position: version.position
+        clonedVinyl.extname = suffix + clonedVinyl.extname;
+        clonedVinyl.contents = await clonedSharpImage.resize({
+          width, height, fit, position
         }).toBuffer();
-
-        return clonedVinyl;
-      } catch (sharpError) {
-        return this.emit('error', new PluginError(pluginName, sharpError));
+      } catch (error) {
+        return this.emit('error', new PluginError(pluginName, error));
       }
-    }));
 
-    resizedImages.forEach(resizedImage => {
-      this.push(resizedImage);
-      log(`${chalk.cyan(pluginName)}: created ${chalk.yellow(resizedImage.relative)}`);
-    });
+      log(`${chalk.cyan(pluginName)}: created ${chalk.yellow(clonedVinyl.relative)}`);
+      return this.push(clonedVinyl);
+    }));
 
     return done();
   }
 });
-
