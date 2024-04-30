@@ -1,5 +1,7 @@
 # directories
 node_modules
+dist
+test/public
 
 # macos
 .DS_Store

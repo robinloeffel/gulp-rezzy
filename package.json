@@ -1,47 +1,45 @@
 {
-  "name": "gulp-rezzy",
-  "version": "2.0.0",
-  "description": " The incredibly fast image resizer utility for gulp. ⚡️",
-  "main": "source/index.js",
-  "types": "types/index.d.ts",
-  "repository": "https://github.com/robinloeffel/gulp-rezzy.git",
-  "homepage": "https://github.com/robinloeffel/gulp-rezzy",
-  "bugs": "https://github.com/robinloeffel/gulp-rezzy/issues",
-  "author": "Robin Löffel (https://robinloeffel.ch) <hi@robinloeffel.ch>",
-  "license": "MIT",
-  "keywords": [
-    "gulpplugin",
-    "gulp",
-    "sharp",
-    "image",
-    "images",
-    "resizing",
-    "resize"
-  ],
-  "engines": {
-    "node": ">=12.22"
-  },
-  "files": [
-    "source",
-    "types"
-  ],
-  "devDependencies": {
-    "eslint": "^8.5.0",
-    "eslint-config-sweet": "^7.0.0",
-    "gulp": "^4.0.2",
-    "onchange": "^7.1.0"
-  },
-  "dependencies": {
-    "chalk": "^4.1.2",
-    "fancy-log": "^1.3.3",
-    "plugin-error": "^1.0.1",
-    "sharp": "^0.29.3"
-  },
-  "peerDependencies": {
-    "gulp": "^4.0.2"
-  },
-  "scripts": {
-    "test": "rm -rf test/public && eslint source && gulp -f test/gulpfile.js",
-    "start": "onchange -i source/index.js test/gulpfile.js -- yarn test"
-  }
+	"name": "gulp-rezzy",
+	"version": "3.0.0",
+	"description": "The incredibly fast image resize utility for gulp. ⚡️",
+	"keywords": [
+		"gulpplugin",
+		"gulp",
+		"sharp",
+		"image",
+		"images",
+		"resizing",
+		"resize"
+	],
+	"homepage": "https://github.com/robinloeffel/gulp-rezzy",
+	"bugs": "https://github.com/robinloeffel/gulp-rezzy/issues",
+	"repository": "https://github.com/robinloeffel/gulp-rezzy.git",
+	"license": "MIT",
+	"author": "Robin Löffel (https://robinloeffel.ch) <hi@robinloeffel.ch>",
+	"type": "module",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"start": "onchange -i 'source/index.ts' 'test/gulpfile.js' -- npm run test",
+		"test": "tsc && rm -rf test/public && gulp -f test/gulpfile.js"
+	},
+	"dependencies": {
+		"sharp": "^0.33.3"
+	},
+	"devDependencies": {
+		"@tsconfig/strictest": "^2.0.5",
+		"@types/node": "^20.12.7",
+		"@types/vinyl": "^2.0.12",
+		"eslint": "^8.57.0",
+		"eslint-config-sweet": "^20.0.0",
+		"gulp": "^5.0.0",
+		"onchange": "^7.1.0",
+		"typescript": "^5.4.5"
+	},
+	"peerDependencies": {
+		"gulp": "^4 || ^5"
+	}
 }

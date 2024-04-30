@@ -1,0 +1,13 @@
+{
+	"extends": "@tsconfig/strictest",
+	"compilerOptions": {
+		"target": "esnext",
+		"module": "preserve",
+		"moduleDetection": "force",
+		"declaration": true,
+		"outDir": "dist"
+	},
+	"include": [
+		"source"
+	]
+}

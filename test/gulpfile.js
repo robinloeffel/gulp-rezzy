@@ -1,23 +1,23 @@
-const { src, dest } = require('gulp');
-const rezzy = require('../source');
+import gulp from "gulp";
+import rezzy from "../dist/index.js";
 
-const images = () => src('source/*')
-  .pipe(rezzy([{
-    width: 640,
-    suffix: '-sm'
-  }, {
-    width: 1280,
-    suffix: '-md'
-  }, {
-    width: 1920,
-    suffix: '-lg'
-  }, {
-    width: 1000,
-    height: 1000,
-    fit: 'cover',
-    position: 'bottom',
-    suffix: '-cover-bottom'
-  }]))
-  .pipe(dest('public'));
+const images = () => gulp.src("./source/*")
+	.pipe(rezzy([{
+		width: 640,
+		suffix: "-sm"
+	}, {
+		width: 1280,
+		suffix: "-md"
+	}, {
+		width: 1920,
+		suffix: "-lg"
+	}, {
+		width: 1000,
+		height: 1000,
+		fit: "cover",
+		position: "bottom",
+		suffix: "-cover-bottom"
+	}]))
+	.pipe(gulp.dest("./public"));
 
-module.exports.default = images;
+export default images;
